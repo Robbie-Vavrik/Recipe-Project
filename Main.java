@@ -15,23 +15,30 @@ public class BreakfastRecipes {
                     	9. Exit
                     """);
 
-            int choice = Integer.parseInt(scan.nextLine());
+            int choice = 0;
+            choice = Integer.parseInt(scan.nextLine());
+            // above removes extra newline & ensures an integer value
+
             switch (choice) {
-                case 1 -> american();
-                case 2 -> british();
-                case 3 -> mexican();
-                case 9 -> {
+                case 1:
+                    american();
+                    break;
+                case 2:
+                    british();
+                    break;
+                case 3:
+                    mexican();
+                    break;
+                case 9:
                     System.out.println("Thanks for playing! Goodbye!");
-                    return;
-                }
-                default -> System.out.println("Invalid choice!");
+                    break breakfastLoop;
+                default:
+                    System.out.println("Invalid choice! Exiting...");
+                    break breakfastLoop;
             }
         }
     }
 
-    private static void handleRecipes(List<Recipe> recipes) {
-
-    }
 
     private static void american() {
 
