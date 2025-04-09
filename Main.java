@@ -38,7 +38,9 @@ public class BreakfastRecipes {
             }
         }
     }
-
+    private static void handleRecipes(List<Recipe> recipes) {
+        
+    }
 
     private static void american() {
 
