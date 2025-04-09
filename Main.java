@@ -1,36 +1,19 @@
-import java.util.Scanner;
 import java.util.*;
 
-
-public class Main {
-    // scan is used as a class variable (not global) for now to handle input
+public class LunchRecipes {
     private static final Scanner scan = new Scanner(System.in);
 
-    /**
-     * A collection of Dice, Card, and other TableTop games.
-     * Completed as spikes in IS 221: Programming Fundamentals
-     * @param args Args are passed from the commandline (think flags)
-     */
-    public static void main(String[] args) {
-        // Display main menu & get user choice (repeat until there is a correct choice)
-
-        DinnerRecipes dinnerRecipes = new DinnerRecipes();
-        LunchRecipes lunchRecipes = new LunchRecipes();
-        BreakfastRecipes breakfastRecipes = new BreakfastRecipes();
-
-
-
-        // Using label to break out of game - should use a function & return
-        gameLoop:
+    public void playLunchRecipes() {
+        lunchLoop:
         while (true) {
             clearScreen();
             System.out.println("""
-                    Welcome to our little Game System!
-                    Please select one of the following games:
-                    \t1. Breakfast Recipes 
-                    \t2. Lunch Recipes 
-                    \t3. Dinner Recipes 
-                    \t9. Exit
+                    Welcome to the lunch recipe book!
+                    Please select one of the following cuisine cultures:
+                    	1. American
+                    	2. British
+                    	3. Mexican
+                    	9. Exit
                     """);
 
             int choice = 0;
@@ -39,35 +22,45 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    breakfastRecipes.playBreakfastRecipes();
+                    american();
                     break;
                 case 2:
-                    lunchRecipes.playLunchRecipes();
+                    british();
                     break;
                 case 3:
-                    dinnerRecipes.playDinnerRecipes();
+                    mexican();
                     break;
                 case 9:
                     System.out.println("Thanks for playing! Goodbye!");
-                    break gameLoop;
+                    break lunchLoop;
                 default:
                     System.out.println("Invalid choice! Exiting...");
-                    break gameLoop;
+                    break lunchLoop;
             }
         }
     }
+
+
+
+
+    private static void american() {
+    }
+
+    private static void british() {
+
+    }
+
+    private static void mexican() {
+
+    }
+
+    
     private static void clearScreen() {
-        // System has a few cool methods including one that gets the OS name
         if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
         } else {
-            // This works in Linux and ....Mac?
             System.out.print("\033[H\033[2J");
         }
-        // Always flush when you use escape codes or use too many newlines
         System.out.flush();
-
     }
 }
-
-
