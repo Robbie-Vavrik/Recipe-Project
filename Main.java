@@ -1,63 +1,46 @@
-import java.util.*;
+import java.util.List;
 
-public class BreakfastRecipes {
-    private static final Scanner scan = new Scanner(System.in);
+public class Recipe {
+    private final String name;
+    private final List<String> ingredients;
+    private final int cookTimeMinutes;
+    private final String description;
+    private final List<String> allergies;
+    private final String asciiArt;
 
-    public void playBreakfastRecipes() {
-        while (true) {
-            clearScreen();
-            System.out.println("""
-                    Welcome to the breakfast recipe book!
-                    Please select one of the following cuisine cultures:
-                    	1. American
-                    	2. British
-                    	3. Mexican
-                    	9. Exit
-                    """);
+    public Recipe(String name, List<String> ingredients, int cookTimeMinutes,
+                  String description, List<String> allergies, String asciiArt) {
+        this.name = name;
+        this.ingredients = ingredients;
+        this.cookTimeMinutes = cookTimeMinutes;
+        this.description = description;
+        this.allergies = allergies;
+        this.asciiArt = asciiArt;
+    }
 
-            int choice = 0;
-            choice = Integer.parseInt(scan.nextLine());
-            // above removes extra newline & ensures an integer value
-
-            switch (choice) {
-                case 1:
-                    american();
-                    break;
-                case 2:
-                    british();
-                    break;
-                case 3:
-                    mexican();
-                    break;
-                case 9:
-                    System.out.println("Thanks for playing! Goodbye!");
-                    break breakfastLoop;
-                default:
-                    System.out.println("Invalid choice! Exiting...");
-                    break breakfastLoop;
-            }
+    public void displayCard() {
+        System.out.println("===================================");
+        System.out.println("RECIPE: " + name);
+        System.out.println("-----------------------------------");
+        System.out.println("Description: " + description);
+        System.out.println("Cook Time: " + cookTimeMinutes + " minutes");
+        System.out.println("Ingredients:");
+        for (String ingredient : ingredients) {
+            System.out.println("   - " + ingredient);
         }
-    }
-
-
-    private static void american() {
-
-    }
-
-    private static void british() {
-
-    }
-
-    private static void mexican() {
-
-    }
-
-    private static void clearScreen() {
-        if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
-        } else {
-            System.out.print("\033[H\033[2J");
+        if (!allergies.isEmpty()) {
+            System.out.println("Allergens: " + String.join(", ", allergies));
         }
-        System.out.flush();
+        System.out.println("-----------------------------------");
+        System.out.println(asciiArt);
+        System.out.println("===================================");
+    }
+
+    public List<String> getAllergies() {
+        return allergies;
+    }
+
+    public String getName() {
+        return name;
     }
 }
