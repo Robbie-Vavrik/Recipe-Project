@@ -1,21 +1,21 @@
-import java.util.*;
+import java.util.Scanner;
 
-public class LunchRecipes {
+public class DinnerRecipes {
+
     private static final Scanner scan = new Scanner(System.in);
 
-    public void playLunchRecipes() {
-        lunchLoop:
+    public void playDinnerRecipes() {
+        foodLoop:
         while (true) {
             clearScreen();
             System.out.println("""
-                    Welcome to the lunch recipe book!
+                    Welcome to the Dinner recipe book!
                     Please select one of the following cuisine cultures:
-                    	1. American
-                    	2. British
-                    	3. Mexican
-                    	9. Exit
+                    \\t1. American\s
+                    \\t2. British\s
+                    \\t3. Mexican\s
+                    \\t9. Exit
                     """);
-
             int choice = 0;
             choice = Integer.parseInt(scan.nextLine());
             // above removes extra newline & ensures an integer value
@@ -32,18 +32,16 @@ public class LunchRecipes {
                     break;
                 case 9:
                     System.out.println("Thanks for playing! Goodbye!");
-                    break lunchLoop;
+                    break foodLoop;
                 default:
                     System.out.println("Invalid choice! Exiting...");
-                    break lunchLoop;
+                    break foodLoop;
             }
         }
     }
 
-
-
-
     private static void american() {
+
     }
 
     private static void british() {
@@ -54,13 +52,23 @@ public class LunchRecipes {
 
     }
 
-    
+
+
+
+
+
+
+
     private static void clearScreen() {
+        // System has a few cool methods including one that gets the OS name
         if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
         } else {
+            // This works in Linux and ....Mac?
             System.out.print("\033[H\033[2J");
         }
+        // Always flush when you use escape codes or use too many newlines
         System.out.flush();
+
     }
 }
