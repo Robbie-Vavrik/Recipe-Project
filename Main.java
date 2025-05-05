@@ -1,14 +1,13 @@
 import java.util.*;
 
-public class LunchRecipes {
+public class DinnerRecipes {
     private static final Scanner scan = new Scanner(System.in);
 
-    public void playLunchRecipes() {
-        lunchLoop:
+    public void playDinnerRecipes() {
         while (true) {
             clearScreen();
             System.out.println("""
-                    Welcome to the lunch recipe book!
+                    Welcome to the dinner recipe book!
                     Please select one of the following cuisine cultures:
                     	1. American
                     	2. British
@@ -16,26 +15,16 @@ public class LunchRecipes {
                     	9. Exit
                     """);
 
-            int choice = 0;
-            choice = Integer.parseInt(scan.nextLine());
-            // above removes extra newline & ensures an integer value
-
+            int choice = Integer.parseInt(scan.nextLine());
             switch (choice) {
-                case 1:
-                    american();
-                    break;
-                case 2:
-                    british();
-                    break;
-                case 3:
-                    mexican();
-                    break;
-                case 9:
+                case 1 -> american();
+                case 2 -> british();
+                case 3 -> mexican();
+                case 9 -> {
                     System.out.println("Thanks for playing! Goodbye!");
-                    break lunchLoop;
-                default:
-                    System.out.println("Invalid choice! Exiting...");
-                    break lunchLoop;
+                    return;
+                }
+                default -> System.out.println("Invalid choice!");
             }
         }
     }
@@ -80,37 +69,37 @@ public class LunchRecipes {
 
     private static void american() {
         List<Recipe> recipes = new ArrayList<>();
-        recipes.add(new Recipe("Grilled Cheese Sandwich", List.of("Bread", "Cheddar Cheese", "Butter"), 10,
-                "Toasted bread with melted cheese in the middle.", List.of("gluten", "dairy"), """
+        recipes.add(new Recipe("Meatloaf", List.of("Ground Beef", "Breadcrumbs", "Onions", "Eggs"), 60,
+                "A classic American comfort dish of seasoned beef loaf.", List.of("gluten", "eggs"), """
                 _________
-               | GRILLED |
-               | CHEESE  |
+               |MEATLOAF|
+               | CLASSIC|
                |_________|
                 """));
-        recipes.add(new Recipe("Chicken Caesar Wrap", List.of("Tortilla", "Chicken", "Lettuce", "Caesar Dressing"), 15,
-                "Chicken Caesar salad wrapped in a tortilla.", List.of("gluten", "dairy"), """
-               _________
-              | WRAP IT |
-              |  UP!    |
-              |_________|
+        recipes.add(new Recipe("Mac and Cheese", List.of("Macaroni", "Cheddar Cheese", "Milk", "Butter"), 30,
+                "Creamy baked macaroni and cheese.", List.of("dairy", "gluten"), """
+                _________
+               |  MAC & |
+               | CHEESE |
+               |_________|
                 """));
         handleRecipes(recipes);
     }
 
     private static void british() {
         List<Recipe> recipes = new ArrayList<>();
-        recipes.add(new Recipe("Ploughman’s Lunch", List.of("Cheese", "Bread", "Pickles", "Apple"), 15,
-                "A cold lunch with cheese, pickles, and bread.", List.of("dairy", "gluten"), """
+        recipes.add(new Recipe("Shepherd’s Pie", List.of("Ground Lamb", "Potatoes", "Onions", "Carrots"), 45,
+                "Baked meat pie topped with mashed potatoes.", List.of("none"), """
                 _________
-               |PLOUGHMAN|
-               | LUNCH  |
+               |SHEPHERD|
+               |  PIE   |
                |_________|
                 """));
-        recipes.add(new Recipe("Cornish Pasty", List.of("Pastry", "Beef", "Potatoes"), 25,
-                "A meat and vegetable filled pastry.", List.of("gluten"), """
+        recipes.add(new Recipe("Bangers and Mash", List.of("Sausages", "Mashed Potatoes", "Gravy"), 35,
+                "Sausages served with mashed potatoes and gravy.", List.of("dairy"), """
                 _________
-               | PASTY  |
-               | PLEASE |
+               |BANGERS |
+               |  MASH  |
                |_________|
                 """));
         handleRecipes(recipes);
@@ -118,18 +107,18 @@ public class LunchRecipes {
 
     private static void mexican() {
         List<Recipe> recipes = new ArrayList<>();
-        recipes.add(new Recipe("Tacos", List.of("Tortilla", "Ground Beef", "Cheese", "Lettuce", "Tomatoes"), 20,
-                "Classic Mexican tacos with toppings.", List.of("dairy"), """
+        recipes.add(new Recipe("Enchiladas", List.of("Tortillas", "Chicken", "Enchilada Sauce", "Cheese"), 40,
+                "Rolled tortillas with filling, covered in sauce.", List.of("dairy", "gluten"), """
                 _________
-               | TACOS  |
-               | YUM!   |
+               |ENCHILAD|
+               |  AS!   |
                |_________|
                 """));
-        recipes.add(new Recipe("Quesadilla", List.of("Tortilla", "Cheese", "Chicken"), 15,
-                "Grilled tortilla with cheese and chicken.", List.of("dairy"), """
+        recipes.add(new Recipe("Pozole", List.of("Pork", "Hominy", "Chili Peppers", "Lettuce", "Radishes"), 60,
+                "A rich soup traditionally served with toppings.", List.of("none"), """
                 _________
-               |QUESADIL|
-               |  LA!   |
+               | POZOLE |
+               |  SOUP  |
                |_________|
                 """));
         handleRecipes(recipes);
