@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.*;
-
 
 public class Main {
     // scan is used as a class variable (not global) for now to handle input
@@ -69,5 +67,3 @@ public class Main {
 
     }
 }
-
-
