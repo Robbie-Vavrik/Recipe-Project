@@ -1,13 +1,34 @@
 import java.util.List;
 
 public class Recipe {
+    // Name of the recipe
     private final String name;
+
+    // List of ingredients used in the recipe
     private final List<String> ingredients;
+
+    // Total cooking time in minutes
     private final int cookTimeMinutes;
+
+    // Description of the dish
     private final String description;
+
+    // List of allergens present in the dish
     private final List<String> allergies;
+
+    // ASCII art representation of the dish
     private final String asciiArt;
 
+    /**
+     * Constructor to initialize all recipe properties.
+     *
+     * @param name             Name of the recipe
+     * @param ingredients      List of ingredients
+     * @param cookTimeMinutes  Cooking time in minutes
+     * @param description      Short description of the dish
+     * @param allergies        Allergens contained in the dish
+     * @param asciiArt         ASCII art illustration
+     */
     public Recipe(String name, List<String> ingredients, int cookTimeMinutes,
                   String description, List<String> allergies, String asciiArt) {
         this.name = name;
@@ -18,6 +39,10 @@ public class Recipe {
         this.asciiArt = asciiArt;
     }
 
+    /**
+     * Displays the full recipe card, including name, ingredients,
+     * cook time, description, allergens, and ASCII art.
+     */
     public void displayCard() {
         System.out.println("===================================");
         System.out.println("RECIPE: " + name);
@@ -28,18 +53,29 @@ public class Recipe {
         for (String ingredient : ingredients) {
             System.out.println("   - " + ingredient);
         }
+        // Show allergens if any are listed
         if (!allergies.isEmpty()) {
             System.out.println("Allergens: " + String.join(", ", allergies));
         }
         System.out.println("-----------------------------------");
-        System.out.println(asciiArt);
+        System.out.println(asciiArt); 
         System.out.println("===================================");
     }
 
+    /**
+     * Getter for the list of allergens.
+     *
+     * @return List of allergy strings
+     */
     public List<String> getAllergies() {
         return allergies;
     }
 
+    /**
+     * Getter for the recipe name.
+     *
+     * @return Name of the recipe
+     */
     public String getName() {
         return name;
     }
