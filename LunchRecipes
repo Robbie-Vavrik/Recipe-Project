@@ -1,0 +1,183 @@
+import java.util.*;
+
+public class LunchRecipes {
+    // Scanner
+    private static final Scanner scan = new Scanner(System.in);
+
+    /**
+     * Starts the lunch recipe mini-game loop.
+     * Prompts the user to select a cuisine or exit.
+     * Each cuisine option calls a method with pre-defined recipes.
+     */
+    public void playLunchRecipes() {
+        lunchLoop:
+        while (true) {
+            clearScreen();
+            System.out.println("""
+                    Welcome to the lunch recipe book!
+                    Please select one of the following cuisine cultures:
+                    	1. American
+                    	2. British
+                    	3. Mexican
+                    	9. Exit
+                    """);
+
+            // Parse user's menu choice
+            int choice = 0;
+            choice = Integer.parseInt(scan.nextLine());
+
+            // Perform action based on the user's choice
+            switch (choice) {
+                case 1:
+                    american();
+                    break;
+                case 2:
+                    british();
+                    break;
+                case 3:
+                    mexican();
+                    break;
+                case 9:
+                    System.out.println("Thanks for playing! Goodbye!");
+                    break lunchLoop; // Exit the game loop
+                default:
+                    System.out.println("Invalid choice! Exiting...");
+                    break lunchLoop;
+            }
+        }
+    }
+
+    /**
+     * Filters out recipes based on user allergies, displays filtered options,
+     * and allows user to choose or get a random suggestion.
+     * Also handles rerolling if the user doesn’t like the first result.
+     */
+    private static void handleRecipes(List<Recipe> recipes) {
+        // Ask user about allergies
+        System.out.println("Do you have any allergies? (comma separated, e.g., dairy,nuts) or press enter to skip:");
+        String allergyInput = scan.nextLine().toLowerCase();
+
+        // Put allergy input into a list
+        List<String> userAllergies = allergyInput.isBlank()
+                ? new ArrayList<>()
+                : List.of(allergyInput.split("\\s*,\\s*"));
+
+        // Filter out recipes containing user allergens
+        List<Recipe> filtered = recipes.stream()
+                .filter(recipe -> recipe.getAllergies().stream().noneMatch(userAllergies::contains))
+                .toList();
+
+        if (filtered.isEmpty()) {
+            System.out.println("No recipes found without your listed allergens.");
+            return;
+        }
+
+        // Show available recipe choices
+        System.out.println("Here are your recipe options:");
+        for (int i = 0; i < filtered.size(); i++) {
+            System.out.println((i + 1) + ". " + filtered.get(i).getName());
+        }
+        System.out.println((filtered.size() + 1) + ". Surprise me!");
+
+        // Let user choose a recipe or pick a random one
+        int choice;
+        try {
+            choice = Integer.parseInt(scan.nextLine());
+        } catch (NumberFormatException e) {
+            choice = filtered.size() + 1; // Default to "Surprise me"
+        }
+
+        // Select a recipe based on user input
+        Recipe selected = (choice >= 1 && choice <= filtered.size())
+                ? filtered.get(choice - 1)
+                : filtered.get(new Random().nextInt(filtered.size()));
+
+        selected.displayCard(); // Show the selected recipe
+
+        // Ask if user likes it and re-run if they say no
+        System.out.println("Do you like this recipe? (yes/no)");
+        if (scan.nextLine().equalsIgnoreCase("no")) {
+            handleRecipes(filtered); // Retry with the same filtered list
+        }
+    }
+
+    /**
+     * Defines and handles a set of American lunch recipes.
+     * Passes them to the allergy-filtering handler.
+     */
+    private static void american() {
+        List<Recipe> recipes = new ArrayList<>();
+        recipes.add(new Recipe("Grilled Cheese Sandwich", List.of("Bread", "Cheddar Cheese", "Butter"), 10,
+                "Toasted bread with melted cheese in the middle.", List.of("gluten", "dairy"), """
+                _________
+               | GRILLED |
+               | CHEESE  |
+               |_________|
+                """));
+        recipes.add(new Recipe("Chicken Caesar Wrap", List.of("Tortilla", "Chicken", "Lettuce", "Caesar Dressing"), 15,
+                "Chicken Caesar salad wrapped in a tortilla.", List.of("gluten", "dairy"), """
+               _________
+              | WRAP IT |
+              |  UP!    |
+              |_________|
+                """));
+        handleRecipes(recipes);
+    }
+
+    /**
+     * Defines and handles a set of British lunch recipes.
+     */
+    private static void british() {
+        List<Recipe> recipes = new ArrayList<>();
+        recipes.add(new Recipe("Ploughman’s Lunch", List.of("Cheese", "Bread", "Pickles", "Apple"), 15,
+                "A cold lunch with cheese, pickles, and bread.", List.of("dairy", "gluten"), """
+                _________
+               |PLOUGHMAN|
+               | LUNCH  |
+               |_________|
+                """));
+        recipes.add(new Recipe("Cornish Pasty", List.of("Pastry", "Beef", "Potatoes"), 25,
+                "A meat and vegetable filled pastry.", List.of("gluten"), """
+                _________
+               | PASTY  |
+               | PLEASE |
+               |_________|
+                """));
+        handleRecipes(recipes);
+    }
+
+    /**
+     * Defines and handles a set of Mexican lunch recipes.
+     */
+    private static void mexican() {
+        List<Recipe> recipes = new ArrayList<>();
+        recipes.add(new Recipe("Tacos", List.of("Tortilla", "Ground Beef", "Cheese", "Lettuce", "Tomatoes"), 20,
+                "Classic Mexican tacos with toppings.", List.of("dairy"), """
+                _________
+               | TACOS  |
+               | YUM!   |
+               |_________|
+                """));
+        recipes.add(new Recipe("Quesadilla", List.of("Tortilla", "Cheese", "Chicken"), 15,
+                "Grilled tortilla with cheese and chicken.", List.of("dairy"), """
+                _________
+               |QUESADIL|
+               |  LA!   |
+               |_________|
+                """));
+        handleRecipes(recipes);
+    }
+
+    /**
+     * Clears the console screen.
+     * Uses a workaround depending on the operating system.
+     */
+    private static void clearScreen() {
+        if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
+        } else {
+            System.out.print("\033[H\033[2J");
+        }
+        System.out.flush();
+    }
+}
