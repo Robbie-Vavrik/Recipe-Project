@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabletop Recipe System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="logo">Tabletop <span class="accent-text">Recipes</span></h1>
+                <p class="tagline">Discover delicious global cuisines, from breakfast to dinner.</p>
+                <button id="surprise-btn" class="btn primary-btn">
+                    <span class="icon">🎲</span> Surprise Me!
+                </button>
+            </div>
+            <div class="hero-decorative">
+                <!-- CSS Art or SVG can go here, using a simple circle for now -->
+                <div class="circle-graphic"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar / Filter Panel -->
+            <aside class="filters-panel">
+                <div class="filter-group">
+                    <h3>Meal Type</h3>
+                    <div class="tabs meal-tabs">
+                        <button class="tab-btn active" data-filter="meal" data-value="all">All</button>
+                        <button class="tab-btn" data-filter="meal" data-value="breakfast">Breakfast</button>
+                        <button class="tab-btn" data-filter="meal" data-value="lunch">Lunch</button>
+                        <button class="tab-btn" data-filter="meal" data-value="dinner">Dinner</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Cuisine</h3>
+                    <div class="chips cuisine-chips">
+                        <button class="chip active" data-filter="cuisine" data-value="all">All</button>
+                        <button class="chip" data-filter="cuisine" data-value="american">🇺🇸 American</button>
+                        <button class="chip" data-filter="cuisine" data-value="british">🇬🇧 British</button>
+                        <button class="chip" data-filter="cuisine" data-value="mexican">🇲🇽 Mexican</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Allergies (Prohibit)</h3>
+                    <div class="checkbox-list">
+                        <label class="checkbox-item">
+                            <input type="checkbox" data-filter="allergy" value="dairy">
+                            <span class="checkmark"></span>
+                            Dairy
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" data-filter="allergy" value="gluten">
+                            <span class="checkmark"></span>
+                            Gluten
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" data-filter="allergy" value="nuts">
+                            <span class="checkmark"></span>
+                            Nuts
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" data-filter="allergy" value="eggs">
+                            <span class="checkmark"></span>
+                            Eggs
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" data-filter="allergy" value="meat">
+                            <span class="checkmark"></span>
+                            Meat (Vegetarian)
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Recipe Grid -->
+            <section class="recipe-display">
+                <div class="recipe-header">
+                    <h2 id="current-category">All Recipes</h2>
+                    <span id="result-count" class="count-badge">0 found</span>
+                </div>
+                <div id="recipe-grid" class="grid-container">
+                    <!-- Cards will be injected here by JS -->
+                </div>
+                <div id="no-results" class="hidden">
+                    <p>No recipes found matching your criteria. 😔</p>
+                    <button class="btn secondary-btn" id="reset-filters">Reset Filters</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Recipe Details -->
+    <div id="recipe-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div class="modal-tags">
+                   <span id="modal-cuisine" class="tag cuisine-tag">American</span>
+                   <span id="modal-meal" class="tag meal-tag">Lunch</span>
+                </div>
+                <h2 id="modal-title">Grilled Cheese Sandwich</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="info-item">
+                        <span class="label">⏱ Cook Time</span>
+                        <span class="value" id="modal-time">10 mins</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">⚠️ Allergens</span>
+                        <span class="value" id="modal-allergens">Dairy, Gluten</span>
+                    </div>
+                </div>
+                <p id="modal-description" class="description">Toasted bread with melted cheese in the middle.</p>
+                
+                <div class="ingredients-section">
+                    <h3>Ingredients</h3>
+                    <ul id="modal-ingredients">
+                        <li>Bread</li>
+                        <li>Cheddar Cheese</li>
+                        <li>Butter</li>
+                    </ul>
+                </div>
+
+                 <div class="art-section">
+                    <pre id="modal-ascii">
+   _________
+  | GRILLED |
+  | CHEESE  |
+  |_________|
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
