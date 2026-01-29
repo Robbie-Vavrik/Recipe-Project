@@ -1,46 +1,61 @@
-# Java Tabletop Recipe System
+# Tabletop Recipe System
 
-The **Java Tabletop Recipe System** is a simple, interactive command-line application designed to explore and showcase a variety of recipes. Built as a learning project for **IS 221: Programming Fundamentals**, it focuses on object-oriented programming (OOP) concepts and modular design.
+Top-tier recipe management, evolved. Originally a Java console application for **IS 221**, this project has been modernized into a responsive **Web Dashboard**.
 
-## Features
+---
 
-- **Interactive Recipe Selection:**
-    - Choose from a variety of recipes, categorized by meal type:
-        - **Breakfast Recipes**
-        - **Lunch Recipes**
-        - **Dinner Recipes**
-- **Customizable Recipe Experience:**
-    - Filter recipes based on allergies (e.g., dairy, gluten, nuts).
-    - Randomly suggest a recipe with a "Surprise Me!" option.
-- **Clear Screen Function:**
-    - Cleans the terminal screen for better readability between selections.
-- **OOP Principles:**
-    - Utilizes encapsulation and class abstraction for managing recipe data and game logic.
-- **Modular Design:**
-    - Easily expandable for adding more recipes or functionality in the future.
+## 🌐 Web Dashboard (New!)
+The **Tabletop Recipe Dashboard** is a single-page application (SPA) that brings the recipe experience to the browser with a premium, glassmorphism-inspired design.
 
-## Project Structure
+### Web Features
+- **Dynamic Filtering**: Instantly filter recipes by **Meal Type** (Breakfast, Lunch, Dinner) and **Cuisine** (American, British, Mexican).
+- **Smart Allergy Handling**: Exclude recipes containing allergens (Dairy, Gluten, Nuts, Eggs, Meat) with real-time updates.
+- **"Surprise Me" Mode**: Can't decide? Let the app pick a random recipe for you based on your current filters.
+- **Premium UI**: 
+    - Responsive Grid Layout.
+    - Hover effects and smooth transitions.
+    - Modal views for detailed recipe cards (Ingredients, ASCII Art, Cook Time).
 
-The project consists of the following Java files:
-![Demo](./demo.gif)
+### Web Tech Stack
+- **HTML5**: Semantic structure.
+- **CSS3**: Variables, Flexbox, Grid, and Glassmorphism styling.
+- **JavaScript (ES6+)**: State management, DOM manipulation, and dynamic data rendering.
 
+### Project Structure (Web)
+- `index.html`: Main entry point.
+- `style.css`: All styling and responsive design rules.
+- `script.js`: Contains logic and the reconstructed recipe database.
 
-- `Main.java`: The entry point of the program that displays the main menu and handles user navigation.
-- `BreakfastRecipes.java`: Contains the logic for displaying and selecting breakfast recipes.
-- `LunchRecipes.java`: Contains the logic for displaying and selecting lunch recipes.
-- `DinnerRecipes.java`: Contains the logic for displaying and selecting dinner recipes.
-- `Recipe.java`: A class that encapsulates recipe details such as ingredients, cook time, allergies, and ASCII art representation.
+---
 
-## Author
+## ☕ Java Console Version (Legacy)
+The original **Java Tabletop Recipe System** is a simple, interactive command-line application designed to explore and showcase a variety of recipes.
+
+### Legacy Features
+- **Interactive Recipe Selection**: Console-based menu system.
+- **OOP Principles**: Utilizes encapsulation and class abstraction.
+- **Clear Screen**: Custom implementations for Windows/Unix terminals.
+
+### Project Structure (Java)
+- `Main.java`: Entry point.
+- `BreakfastRecipes.java`, `LunchRecipes.java`, `DinnerRecipes.java`: Logic for specific meal categories.
+- `Recipe.java`: Data model class.
+
+---
+
+## Credits & Authors
 
 **Robert Vavrik**  
+*Original Creator & Java Developer*  
 Cybersecurity student | Java & Python developer  
 Email: rvavrik@millikin.edu  
 GitHub: [Robbie-Vavrik](https://github.com/Robbie-Vavrik)
+
+**Antigravity**  
+*AI Collaborator & Frontend Engineer*  
+Responsible for porting the legacy Java logic to the Web, strictly adhering to modern UI/UX principles, and generating missing data assets.
 
 ## License
 
 This project is licensed under the MIT License.  
 You are free to use, modify, and distribute this project for educational purposes.
-
-
